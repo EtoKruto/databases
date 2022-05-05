@@ -29,13 +29,13 @@ describe('Persistent Node Chat Server', () => {
 
   it('Should insert posted messages to the DB', (done) => {
     const username = 'Valjean';
-    const message = 'In mercy\'s name, three days is all I need.';
+    const text = 'In mercy\'s name, three days is all I need.';
     const roomname = 'Hello';
     // Create a user on the chat server database.
     axios.post(`${API_URL}/users`, { username })
       .then(() => {
         // Post a message to the node chat server:
-        return axios.post(`${API_URL}/messages`, { username, message, roomname });
+        return axios.post(`${API_URL}/messages`, { username, text, roomname });
       })
       .then(() => {
         // Now if we look in the database, we should find the posted message there.
@@ -53,7 +53,7 @@ describe('Persistent Node Chat Server', () => {
           expect(results.length).toEqual(1);
 
           // TODO: If you don't have a column named text, change this test.
-          expect(results[0].text).toEqual(message);
+          expect(results[0].text).toEqual(text);
           done();
         });
       })
