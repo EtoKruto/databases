@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS users;
 
 CREATE TABLE users (
   /* Describe your table here.*/
-  id INT not null AUTO_INCREMENT,
+  id INT NOT NULL AUTO_INCREMENT,
   username varchar(25) NOT NULL,
   PRIMARY KEY(id)
 );
@@ -15,12 +15,11 @@ CREATE TABLE users (
 CREATE TABLE messages (
   -- /* Describe your table here.*/
   id INT AUTO_INCREMENT,
-  username VARCHAR(25) NOT NULL,
+  user_id INT NOT NULL,
   text VARCHAR(140) NOT NULL,
   roomname VARCHAR(25) NOT NULL,
-  -- user_id INT NOT NULL,
-  -- FOREIGN KEY(user_id) REFERENCES users (id),
-  PRIMARY KEY (id)
+  PRIMARY KEY (id),
+  FOREIGN KEY(user_id) REFERENCES users (id)
 );
 
 -- /* Create other tables and define schemas for them here! */

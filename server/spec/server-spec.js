@@ -20,7 +20,8 @@ describe('Persistent Node Chat Server', () => {
     /* Empty the db table before all tests so that multiple tests
      * (or repeated runs of the tests)  will not fail when they should be passing
      * or vice versa */
-    dbConnection.query(`truncate ${tablename}`, done);
+
+    dbConnection.query(`truncate TABLE ${tablename}`, done);
   }, 6500);
 
   afterAll(() => {

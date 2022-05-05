@@ -13,4 +13,3 @@ exports.connection = mysql.createConnection({
   user: 'student',
   database: 'chat'
 });
-

@@ -14,7 +14,8 @@ module.exports = {
     });
   }, // a function which handles a get request for all messages
   post: function (req, res) {
-    models.messages.create(req.body, (err) => {
+    var args = [req.body.username, req.body.text, req.body.roomname];
+    models.messages.create(args, (err) => {
       if (err) {
         console.log('error in controller, post', err);
         res.sendStatus(401);

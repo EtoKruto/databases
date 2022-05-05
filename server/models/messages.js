@@ -2,21 +2,21 @@ var db = require('../db');
 
 module.exports = {
   getAll: function (callback) {
-    db.connection.query('SELECT * FROM messages', (err, rows) => {
+    //"select messages.id, messages.text, messages. roomname from messages left outer join users on (messages.user_id = users.id) order by messages.id desc";
+
+
+    db.connection.query('SELECT messages.id, messages.text, messages.roomname, users.username FROM messages left outer join users on (messages.user_id = users.id) order by messages.id desc', (err, rows) => {
       if (err) {
         console.log('error inside MODELS GETALL', err);
         callback(err, null);
       } else {
-        console.log(rows);
         callback(null, rows);
       }
     });
   }, // a function which produces all the messages
-  create: function (body, callback) {
-    console.log(body.text);
-    var queryStringCreate = 'insert into messages (username, text, roomname) values (?, ?, ?)';
-    var argsCreate = [body.username, body.text, body.roomname];
-    db.connection.query(queryStringCreate, argsCreate, (err) => {
+  create: function (args, callback) {
+    var queryStringCreate = 'insert into messages (user_id, text, roomname) values ((select id from users where username = ?), ?, ?)';
+    db.connection.query(queryStringCreate, args, (err) => {
       if (err) {
         console.log('error in mysql post', err);
         callback(err);
