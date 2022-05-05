@@ -9,4 +9,8 @@ var mysql = require('mysql2');
 // OR
 // user: 'root', password: 'some_password_you_created_at_install'
 
+exports.connection = mysql.createConnection({
+  user: 'student',
+  database: 'chat'
+});
 
