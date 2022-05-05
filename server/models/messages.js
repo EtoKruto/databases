@@ -7,7 +7,7 @@ module.exports = {
 
     db.connection.query('SELECT messages.id, messages.text, messages.roomname, users.username FROM messages left outer join users on (messages.user_id = users.id) order by messages.id desc', (err, rows) => {
       if (err) {
-        console.log('error inside MODELS GETALL', err);
+        console.log('error inside MESSAGES GETALL', err);
         callback(err, null);
       } else {
         callback(null, rows);
